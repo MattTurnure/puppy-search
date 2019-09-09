@@ -1,0 +1,30 @@
+.THIS .cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.THIS .cards .col {
+    flex: 1;
+    padding: 12px;
+}
+
+.THIS .card-content {
+    flex: 1;
+    height: 100%;
+}
+
+.THIS .grid {
+    display: flex;
+}
+
+.THIS .grid-col {
+    flex: 1;
+}
+
+.THIS .grid-col:first-child {
+    flex: 1 0 34%;
+}
+
+.THIS .grid-col:last-child {
+    flex: 1 0 66%;
+}

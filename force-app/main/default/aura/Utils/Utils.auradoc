@@ -1,0 +1,33 @@
+<aura:documentation>
+    <aura:description>
+        <h2>Utils</h2>
+        <p>Utils is a Lightning Component library that features common utility methods.</p>
+
+        <h3>Usage</h3>
+        <p>To use this component, add <code>&lt;c:Utils /&gt;</code> in the component that needs to use it.</p>
+    </aura:description>
+    <aura:example name="callServer" ref="c:Utils" label="Instantiating the callAction method">
+        <p>The instantiation of callServer should come from the component that implements <code>&lt;c:Utils /&gt;</code></p>
+<pre><code>
+({
+    sampleMethod: function (component) {
+        const utils = component.find('utils');
+        const action = component.get('c.apexMethod');
+        const params = {
+            term: 'Absolute'
+        };
+
+        utils.callAction(action, params)
+            .then($A.getCallback(response => {
+                // do something with response
+            }))
+            .catch($A.getCallback(err => {
+                utils.showToast(
+                    'System Error', err, 'error', 'sticky'
+                );
+            }));
+    }
+});
+</code></pre>
+    </aura:example>
+</aura:documentation>

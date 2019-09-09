@@ -1,0 +1,67 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId"
+    controller="DogApi">
+    <c:Utils aura:id="utils" />
+
+    <aura:attribute name="breeds" type="Map" />
+    <aura:attribute name="breedName" type="String" />
+
+    <!-- search results -->
+    <aura:attribute name="puppyData" type="Map"/>
+    <aura:attribute name="puppyColumns" type="List"/>
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    <aura:handler name="render" value="{! this }" action="{! c.onRender }" />
+
+    <div class="slds-p-around_medium">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_5-of-12">
+                <!-- keyword search -->
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="breed">Breed</label>
+                    <div class="slds-form-element__control">
+                        <input id="breed" class="slds-input" type="text" onkeyup="{! c.setBreedName }" />
+                    </div>
+                </div>
+
+                <!-- checkboxes -->
+                <fieldset class="slds-form-element slds-p-vertical_small">
+                    <legend class="slds-form-element__legend slds-form-element__label">Good with:</legend>
+                    <lightning:input type="checkbox" label="Other dogs" name="goodDogs" checked="false" />
+                    <lightning:input type="checkbox" label="Kids" name="goodKids" checked="false" />
+                    <lightning:input type="checkbox" label="Cats" name="goodCats" checked="false" />
+                </fieldset>
+
+                <!-- checkboxes -->
+                <fieldset class="slds-form-element slds-p-vertical_small">
+                    <legend class="slds-form-element__legend slds-form-element__label">Age:</legend>
+                    <lightning:input type="checkbox" label="Baby" name="baby" checked="false" />
+                    <lightning:input type="checkbox" label="Young" name="young" checked="false" />
+                    <lightning:input type="checkbox" label="Adult" name="adult" checked="false" />
+                    <lightning:input type="checkbox" label="Senior" name="senior" checked="false" />
+                </fieldset>
+
+                <lightning:input type="radio" label="All dogs" name="isShelter" checked="true" />
+                <lightning:input type="radio" label="Shelter dogs only" name="isShelter" checked="false" />
+
+                <div class="slds-p-vertical_small">
+                    <button class="slds-button slds-button_brand" onclick="{! c.getPuppyImage }">
+                        Fetch!
+                    </button>
+                </div>
+            </div>
+            <div class="slds-col slds-size_7-of-12">
+                <lightning:datatable data="{! v.puppyData }"
+                    columns="{! v.puppyColumns }"
+                    hideCheckboxColumn="true"
+                    keyField="id"
+                    onrowselection="{! c.handleSelectedRows }"
+                    onrowaction="{! c.handleRowAction }"
+                    enableInfiniteLoading="true"
+                    onloadmore="{! c.loadMoreRows }" />
+            </div>
+        </div>
+
+        {! v.body }
+
+    </div>
+</aura:component>

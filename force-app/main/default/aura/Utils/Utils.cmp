@@ -1,0 +1,24 @@
+<aura:component access="global" description="Common Lightning Component utility methods">
+    <aura:method access="global"
+        name="callAction"
+        action="{! c.callAction }"
+        description="Calls an Apex controller method and returns a Promise" />
+    <aura:attribute name="action"
+        type="Map"
+        description="Apex controller method called" />
+    <aura:attribute name="params"
+        type="Map"
+        description="Optional parameters passed to the action" />
+    <aura:method access="global"
+        name="showToast"
+        action="{! c.showToast }"
+        description="Fire toast message" />
+    <aura:method access="global"
+        name="formatNumber"
+        action="{! c.formatNumber }"
+        description="Format number based on locale" />
+    <aura:method access="global"
+        name="logProxy"
+        action="{! c.logProxy }"
+        description="Developer method to examine Proxy objects in the browser console" />
+</aura:component>

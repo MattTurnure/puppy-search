@@ -1,0 +1,105 @@
+<aura:component
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId"
+    controller="DogApi">
+    <c:Utils aura:id="utils" />
+
+    <aura:attribute name="breeds" type="Map" />
+    <aura:attribute name="breedName" type="String" />
+    <aura:attribute name="loaded" type="Boolean" default="true" />
+
+    <!-- search results -->
+    <aura:attribute name="puppyData" type="Map" />
+    <aura:attribute name="puppyColumns" type="List" />
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    <aura:handler name="render" value="{! this }" action="{! c.onRender }" />
+
+    <div class="slds-p-around_medium">
+        <form onsubmit="{! c.getPups }">
+            <div class="group">
+                <div class="group-col">
+                    <!-- combobox -->
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="breed-selection">Select a breed</label>
+                        <datalist id="breeds">
+                            <select name="breed">
+                                <option>Select One</option>
+                                <aura:iteration items="{! v.breeds }" var="breed">
+                                    <option>{! breed }</option>
+                                </aura:iteration>
+                            </select>
+                        </datalist>
+                        <input class="slds-input" type="text" id="breed-selection" list="breeds" aura:id="breedselect"
+                            onchange="{! c.setBreedName }" />
+                    </div>
+                </div>
+                <div class="group-col">
+                    <!-- checkbox button group -->
+                    <fieldset class="slds-form-element">
+                        <legend class="slds-form-element__legend slds-form-element__label">Good with</legend>
+                        <div class="slds-form-element__control">
+                            <div class="slds-checkbox_button-group">
+                                <span class="slds-button slds-checkbox_button">
+                                    <input id="otherdogs" name="checkbox" type="checkbox" value="otherdogs" />
+                                    <label class="slds-checkbox_button__label" for="otherdogs">
+                                        <span class="slds-checkbox_faux">Other Dogs</span>
+                                    </label>
+                                </span>
+                                <span class="slds-button slds-checkbox_button">
+                                    <input id="othercats" name="checkbox" type="checkbox" value="othercats" />
+                                    <label class="slds-checkbox_button__label" for="othercats">
+                                        <span class="slds-checkbox_faux">Other Cats</span>
+                                    </label>
+                                </span>
+                                <span class="slds-button slds-checkbox_button">
+                                    <input id="kids" name="checkbox" type="checkbox" value="kids" />
+                                    <label class="slds-checkbox_button__label" for="kids">
+                                        <span class="slds-checkbox_faux">Kids</span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="group-col">
+                    <!-- checkbox -->
+                    <lightning:input class="slds-p-bottom_x-small" type="checkbox" label="Shelter dogs only"
+                        name="isShelter" checked="false" />
+                </div>
+                <div class="group-col">
+                    <button class="slds-button slds-button_brand" onclick="{! c.getPups }">
+                        Fetch!
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="cards">
+            <aura:iteration items="{! v.puppyData }" var="pup">
+                <div class="col">
+                    <div class="slds-box card-content">
+                        <div class="grid">
+                            <div class="grid-col slds-p-bottom_medium">
+                                <img src="{! pup.imageURL }" alt="" />
+                            </div>
+                            <div class="grid-col">
+                                <h2 class="slds-text-heading--small slds-p-left_medium slds-m-bottom_small">
+                                    {! pup.name }
+                                </h2>
+                                <p class="slds-p-left_medium slds-p-bottom_medium">{! pup.description }</p>
+                            </div>
+                        </div>
+                        <div class="slds-border_top slds-p-top_small">
+                            <span class="slds-badge">{! pup.breed }</span>
+                            <span class="slds-badge">{! pup.age }</span>
+                            <span class="slds-badge">{! pup.sex }</span>
+                            <span class="slds-badge">{! pup.shelter }</span>
+                        </div>
+                    </div>
+                </div><!-- /.col -->
+            </aura:iteration>
+
+            <lightning:spinner class="{! v.loaded ? 'slds-hide' : ''}" alternativeText="Loading" />
+        </div>
+    </div>
+</aura:component>

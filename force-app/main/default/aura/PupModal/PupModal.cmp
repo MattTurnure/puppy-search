@@ -1,0 +1,33 @@
+<aura:component access="global">
+    <aura:attribute name="pup" type="Map" default="{id: 'asbd', 'name': 'Stella'}" />
+
+    <section role="dialog" tabindex="-1" aria-labelledby="{! v.pup.id }" aria-modal="true" aria-describedby="modal-pup"
+        class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <lightning:buttonIcon class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    iconName="utility:close" size="large" variant="bare" alternativeText="Close" onclick="{! c.destroy }" />
+                <h2 id="{! v.pup.id }" class="slds-text-heading_medium slds-hyphenate">{! v.pup.name }</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-pup">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <img src="{! v.pup.imageURL }" alt="" />
+                    </div>
+                    <div class="slds-col">
+                        {! v.pup.description }
+                    </div>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <div class="slds-m-bottom_x-small">
+                    <span class="slds-badge">{! v.pup.breed }</span>
+                    <span class="slds-badge">{! v.pup.age }</span>
+                    <span class="slds-badge">{! v.pup.sex }</span>
+                    <span class="slds-badge">{! v.pup.shelter }</span>
+                </div>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</aura:component>

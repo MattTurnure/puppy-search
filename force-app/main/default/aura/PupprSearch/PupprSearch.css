@@ -1,0 +1,55 @@
+.THIS {
+    background-color: #fff;
+}
+
+.THIS .cards {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    margin: 0 -1rem;
+    position: relative;
+}
+
+.THIS .cards .col {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+.THIS .card-content {
+    flex: 1;
+    height: 100%;
+}
+
+.THIS .grid {
+    display: flex;
+}
+
+.THIS .grid-col {
+    flex: 1;
+}
+
+.THIS .grid-col:first-child {
+    flex: 1 0 34%;
+}
+
+.THIS .grid-col:last-child {
+    flex: 1 0 66%;
+}
+
+.THIS .group {
+    align-items: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1rem;
+    padding: 0 0.5rem;
+}
+
+.THIS .group-col {
+    align-self: flex-end;
+    flex: 0 0 auto;
+    padding: 0 0.5rem;
+}
+
+.THIS .slds-form-element__legend {
+    font-weight: 400;
+}
